@@ -137,6 +137,26 @@ function App() {
 
   const closeMenu = () => setIsMenuOpen(false);
 
+  React.useEffect(() => {
+    const animatedItems = document.querySelectorAll("[data-animate]");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.16 },
+    );
+
+    animatedItems.forEach((item) => observer.observe(item));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main className="site-shell">
       <section className="hero" aria-label="Clínica Principia">
@@ -216,17 +236,17 @@ function App() {
         </div>
 
         <div className="about-metrics" aria-label="Diferenciais">
-          <article>
+          <article data-animate style={{ "--delay": "0ms" }}>
             <span>01</span>
             <h3>Diagnóstico com contexto</h3>
             <p>Exames, sintomas, histórico e objetivos são avaliados em conjunto.</p>
           </article>
-          <article>
+          <article data-animate style={{ "--delay": "90ms" }}>
             <span>02</span>
             <h3>Tratamento personalizado</h3>
             <p>Condutas clínicas e intervencionistas escolhidas para o seu caso.</p>
           </article>
-          <article>
+          <article data-animate style={{ "--delay": "180ms" }}>
             <span>03</span>
             <h3>Recuperação acompanhada</h3>
             <p>Monitoramento da evolução para ajustar o plano com responsabilidade.</p>
@@ -243,7 +263,12 @@ function App() {
 
           <div className="process-list">
             {processSteps.map(({ title, description }, index) => (
-              <article className="process-card" key={title}>
+              <article
+                className="process-card"
+                key={title}
+                data-animate
+                style={{ "--delay": `${index * 100}ms` }}
+              >
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <h3>{title}</h3>
                 <p>{description}</p>
@@ -264,8 +289,13 @@ function App() {
         </div>
 
         <div className="specialties-grid">
-          {specialties.map(({ title, subtitle, description, icon: Icon }) => (
-            <article className="specialty-card" key={title}>
+          {specialties.map(({ title, subtitle, description, icon: Icon }, index) => (
+            <article
+              className="specialty-card"
+              key={title}
+              data-animate
+              style={{ "--delay": `${(index % 3) * 90}ms` }}
+            >
               <span className="specialty-icon" aria-hidden="true">
                 <Icon size={24} strokeWidth={2.2} />
               </span>
@@ -287,8 +317,13 @@ function App() {
         </div>
 
         <div className="units-grid">
-          {units.map(({ city, address, phones, mapQuery }) => (
-            <article className="unit-card" key={city}>
+          {units.map(({ city, address, phones, mapQuery }, index) => (
+            <article
+              className="unit-card"
+              key={city}
+              data-animate
+              style={{ "--delay": `${(index % 2) * 120}ms` }}
+            >
               <div className="unit-map">
                 <iframe
                   title={`Mapa da unidade ${city}`}
