@@ -54,7 +54,7 @@ button {
   overflow: hidden;
   isolation: isolate;
   background:
-    linear-gradient(90deg, rgba(248, 244, 237, 0.98) 0%, rgba(248, 244, 237, 0.88) 34%, rgba(248, 244, 237, 0.38) 61%, rgba(248, 244, 237, 0.04) 100%),
+    linear-gradient(90deg, rgba(6, 29, 54, 0.96) 0%, rgba(8, 40, 75, 0.86) 36%, rgba(4, 107, 117, 0.42) 64%, rgba(4, 107, 117, 0.08) 100%),
     url("/bg-hero.png") center top / cover no-repeat;
 }
 
@@ -230,6 +230,14 @@ button {
   text-transform: uppercase;
 }
 
+.hero .eyebrow {
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #c7f4ee;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+  backdrop-filter: blur(12px);
+}
+
 h1,
 h2,
 h3,
@@ -240,7 +248,7 @@ p {
 h1 {
   max-width: 760px;
   margin-top: 22px;
-  color: var(--ink);
+  color: #ffffff;
   font-size: clamp(3.25rem, 5.7vw, 6.15rem);
   font-weight: 760;
   line-height: 0.94;
@@ -250,7 +258,7 @@ h1 {
 .hero-copy > p {
   max-width: 610px;
   margin-top: 28px;
-  color: var(--ink-soft);
+  color: rgba(255, 255, 255, 0.8);
   font-size: clamp(1.08rem, 1.35vw, 1.25rem);
   line-height: 1.58;
 }
@@ -288,14 +296,15 @@ h1 {
 }
 
 .button-secondary {
-  border: 1px solid rgba(8, 40, 75, 0.16);
-  color: var(--ink);
-  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
 }
 
 .button-secondary:hover {
-  color: var(--teal-dark);
-  background: #ffffff;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.18);
   transform: translateY(-2px);
 }
 
@@ -817,6 +826,13 @@ h1 {
 }
 
 @media (max-width: 1000px) {
+  .hero {
+    min-height: 780px;
+    background:
+      linear-gradient(90deg, rgba(6, 29, 54, 0.96) 0%, rgba(8, 40, 75, 0.88) 48%, rgba(4, 107, 117, 0.34) 100%),
+      url("/bg-hero.png") 58% top / cover no-repeat;
+  }
+
   .header {
     grid-template-columns: 170px 1fr auto;
     gap: 16px;
@@ -832,6 +848,7 @@ h1 {
   }
 
   .hero-copy {
+    max-width: 700px;
     padding-bottom: 0;
   }
 
@@ -881,8 +898,8 @@ h1 {
   .hero {
     min-height: auto;
     background:
-      linear-gradient(90deg, rgba(248, 244, 237, 0.98) 0%, rgba(248, 244, 237, 0.88) 68%, rgba(248, 244, 237, 0.34) 100%),
-      url("/bg-hero.png") 62% top / cover no-repeat;
+      linear-gradient(180deg, rgba(6, 29, 54, 0.96) 0%, rgba(8, 40, 75, 0.9) 58%, rgba(4, 107, 117, 0.72) 100%),
+      url("/bg-hero.png") 68% top / cover no-repeat;
   }
 
   .header {
@@ -955,22 +972,26 @@ h1 {
 
   .hero-content {
     width: calc(100% - 36px);
-    padding-top: 158px;
-    padding-bottom: 66px;
+    padding-top: 146px;
+    padding-bottom: 58px;
   }
 
   h1 {
-    max-width: 11ch;
-    font-size: clamp(2.75rem, 13vw, 4.2rem);
+    max-width: 13ch;
+    font-size: clamp(2.45rem, 11vw, 3.75rem);
+    line-height: 0.98;
   }
 
   .hero-copy > p {
-    max-width: 33ch;
-    font-size: 1rem;
+    max-width: 34ch;
+    margin-top: 22px;
+    font-size: 0.98rem;
+    line-height: 1.55;
   }
 
   .hero-actions {
     align-items: stretch;
+    margin-top: 28px;
   }
 
   .button {
