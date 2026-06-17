@@ -1,6 +1,6 @@
-import { createServer } from "node:http";
-import { extname, join, normalize, resolve } from "node:path";
-import { existsSync, statSync, createReadStream } from "node:fs";
+const { createServer } = require("node:http");
+const { extname, join, normalize, resolve } = require("node:path");
+const { existsSync, statSync, createReadStream } = require("node:fs");
 
 const port = process.env.PORT || 3000;
 const distDir = resolve("dist");
