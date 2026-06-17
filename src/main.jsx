@@ -306,6 +306,19 @@ function App() {
               <p>{description}</p>
             </article>
           ))}
+
+          <aside className="specialties-mini-banner" data-animate style={{ "--delay": "180ms" }}>
+            <span>Plano de cuidado Principia</span>
+            <h3>Do diagnóstico à solução!</h3>
+            <p>
+              Uma equipe integrada para entender a causa da queixa, definir o melhor caminho e
+              acompanhar cada etapa da sua recuperação com clareza.
+            </p>
+            <a href="#contato">
+              Agendar avaliação
+              <ArrowRight size={18} strokeWidth={2.5} aria-hidden="true" />
+            </a>
+          </aside>
         </div>
       </section>
 
@@ -441,7 +454,10 @@ function App() {
 
         <div className="footer-bottom">
           <span>© 2026 Clínica Principia. Todos os direitos reservados.</span>
-          <span>Medicina especializada com cuidado multidisciplinar.</span>
+          <a className="developer-credit" href="https://corpad.com.br" target="_blank" rel="noreferrer">
+            <span>Desenvolvido por</span>
+            <img src="/copard.png" alt="CORPAD" />
+          </a>
         </div>
       </footer>
     </main>
