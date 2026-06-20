@@ -21,11 +21,13 @@ import "./styles.css";
 
 const whatsappNumber = "5511979610690";
 const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+const siteUrl = "https://clinicaprincipia.com.br/";
 
 const navLinks = [
   ["Sobre", "#sobre"],
   ["Especialidades", "#especialidades"],
   ["Unidades", "#unidades"],
+  ["Perguntas", "#perguntas"],
   ["Contato", "#contato"],
 ];
 
@@ -96,24 +98,47 @@ const processSteps = [
 const units = [
   {
     city: "Butantã | SP",
+    name: "Clínica Principia Butantã",
     address: ["Rua Alvarenga, 220"],
+    streetAddress: "Rua Alvarenga, 220",
+    addressLocality: "São Paulo",
+    addressRegion: "SP",
+    addressCountry: "BR",
     phones: ["11 2305-9638", "11 97961-0690"],
     mapQuery: "Rua Alvarenga 220 Butanta Sao Paulo SP",
   },
   {
     city: "Itaim Bibi | SP",
+    name: "Clínica Principia Itaim Bibi",
     address: ["Rua Joaquim Floriano, 533", "Sala 1313"],
+    streetAddress: "Rua Joaquim Floriano, 533 - Sala 1313",
+    addressLocality: "São Paulo",
+    addressRegion: "SP",
+    addressCountry: "BR",
     phones: ["11 3079-6701", "11 97201-3639"],
     mapQuery: "Rua Joaquim Floriano 533 Sala 1313 Itaim Bibi Sao Paulo SP",
   },
   {
     city: "Brasília | DF",
-    address: ["Centro Clínico OHB", "Setor Hospitalar Local Sul", "Bloco A, Sala 318"],
+    name: "Clínica Principia Brasília",
+    address: [
+      "OHB Centro Médico",
+      "SHLS Quadra 716 - Conjunto L",
+      "Bloco B - Sala 616",
+      "Asa Sul - Brasília/DF",
+      "CEP 70390-700",
+    ],
+    streetAddress: "SHLS Quadra 716 - Conjunto L, Bloco B - Sala 616, Asa Sul",
+    addressLocality: "Brasília",
+    addressRegion: "DF",
+    postalCode: "70390-700",
+    addressCountry: "BR",
     phones: ["11 2305-9638", "11 97961-0690"],
-    mapQuery: "Centro Clinico OHB Setor Hospitalar Local Sul Bloco A Sala 318 Brasilia DF",
+    mapQuery: "OHB Centro Medico SHLS Quadra 716 Conjunto L Bloco B Sala 616 Asa Sul Brasilia DF CEP 70390-700",
   },
   {
     city: "Salvador | BA",
+    name: "Clínica Principia Salvador",
     address: [
       "Centro Médico Bela Vista",
       "Shopping Bela Vista",
@@ -121,8 +146,35 @@ const units = [
       "Pernambués - Salvador",
       "Próximo à Leroy Merlin",
     ],
+    streetAddress: "Rua Alameda Euvaldo Luz, 92 - Piso L2, Shopping Bela Vista",
+    addressLocality: "Salvador",
+    addressRegion: "BA",
+    addressCountry: "BR",
     phones: ["11 2305-9638", "11 97961-0690"],
     mapQuery: "Shopping Bela Vista Alameda Euvaldo Luz 92 Pernambues Salvador BA",
+  },
+];
+
+const faqs = [
+  {
+    question: "O que a Clínica Principia trata?",
+    answer:
+      "A Clínica Principia atende pessoas com dor, alterações de movimento, queixas de coluna, articulações, lesões traumáticas ou esportivas, alterações metabólicas e demandas de saúde da mulher.",
+  },
+  {
+    question: "Quais especialidades estão disponíveis?",
+    answer:
+      "As áreas de atuação incluem neurocirurgia, endocrinologia, ortopedia, reumatologia, traumatologia, medicina da dor e ginecologia.",
+  },
+  {
+    question: "Em quais cidades a Clínica Principia atende?",
+    answer:
+      "A Clínica Principia possui unidades em São Paulo, nos bairros Butantã e Itaim Bibi, em Brasília/DF e em Salvador/BA.",
+  },
+  {
+    question: "Como agendar uma consulta?",
+    answer:
+      "O agendamento é feito pelo WhatsApp. Informe sua queixa, cidade de atendimento e melhor horário para que a equipe direcione você para a unidade e especialidade adequadas.",
   },
 ];
 
@@ -131,6 +183,76 @@ const getMapUrl = (query) =>
 
 const getMapsLink = (query) =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      name: "Clínica Principia",
+      url: siteUrl,
+      inLanguage: "pt-BR",
+      description:
+        "Site oficial da Clínica Principia, com informações sobre especialidades médicas, unidades e agendamento.",
+      publisher: { "@id": `${siteUrl}#organization` },
+    },
+    {
+      "@type": "MedicalOrganization",
+      "@id": `${siteUrl}#organization`,
+      name: "Clínica Principia",
+      url: siteUrl,
+      logo: `${siteUrl}logo.png`,
+      image: `${siteUrl}bg-hero.png`,
+      telephone: "+55 11 2305-9638",
+      sameAs: [],
+      medicalSpecialty: specialties.map(({ title }) => title),
+      areaServed: [
+        { "@type": "City", name: "São Paulo" },
+        { "@type": "City", name: "Brasília" },
+        { "@type": "City", name: "Salvador" },
+      ],
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: "+55 11 97961-0690",
+          contactType: "Agendamento",
+          availableLanguage: ["pt-BR"],
+        },
+      ],
+    },
+    ...units.map((unit) => ({
+      "@type": "MedicalClinic",
+      "@id": `${siteUrl}#${unit.city.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-")}`,
+      name: unit.name,
+      url: siteUrl,
+      image: `${siteUrl}bg-hero.png`,
+      telephone: `+55 ${unit.phones[0]}`,
+      parentOrganization: { "@id": `${siteUrl}#organization` },
+      medicalSpecialty: specialties.map(({ title }) => title),
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: unit.streetAddress,
+        addressLocality: unit.addressLocality,
+        addressRegion: unit.addressRegion,
+        postalCode: unit.postalCode,
+        addressCountry: unit.addressCountry,
+      },
+    })),
+    {
+      "@type": "FAQPage",
+      "@id": `${siteUrl}#faq`,
+      mainEntity: faqs.map(({ question, answer }) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: answer,
+        },
+      })),
+    },
+  ],
+};
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -159,6 +281,10 @@ function App() {
 
   return (
     <main className="site-shell">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <section className="hero" aria-label="Clínica Principia">
         <header className="header">
           <a className="brand" href="#" aria-label="Clínica Principia" onClick={closeMenu}>
@@ -371,6 +497,33 @@ function App() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="faq-section" id="perguntas" aria-labelledby="faq-title">
+        <div className="faq-inner">
+          <div className="section-heading faq-heading">
+            <span className="section-kicker">Perguntas frequentes</span>
+            <h2 id="faq-title">Respostas rápidas sobre atendimento, unidades e especialidades.</h2>
+            <p>
+              Informações diretas para quem está procurando uma clínica integrada para dor,
+              coluna, movimento, metabolismo ou saúde da mulher.
+            </p>
+          </div>
+
+          <div className="faq-list">
+            {faqs.map(({ question, answer }, index) => (
+              <article
+                className="faq-item"
+                key={question}
+                data-animate
+                style={{ "--delay": `${index * 70}ms` }}
+              >
+                <h3>{question}</h3>
+                <p>{answer}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
