@@ -22,6 +22,7 @@ import "./styles.css";
 const whatsappNumber = "5511979610690";
 const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 const siteUrl = "https://clinicaprincipia.com.br/";
+const localBusinessId = (slug) => `${siteUrl}unidades/${slug}#clinic`;
 
 const navLinks = [
   ["Sobre", "#sobre"],
@@ -98,6 +99,7 @@ const processSteps = [
 const units = [
   {
     city: "Butantã | SP",
+    slug: "butanta",
     name: "Clínica Principia Butantã",
     address: ["Rua Alvarenga, 220"],
     streetAddress: "Rua Alvarenga, 220",
@@ -109,6 +111,7 @@ const units = [
   },
   {
     city: "Itaim Bibi | SP",
+    slug: "itaim-bibi",
     name: "Clínica Principia Itaim Bibi",
     address: ["Rua Joaquim Floriano, 533", "Sala 1313"],
     streetAddress: "Rua Joaquim Floriano, 533 - Sala 1313",
@@ -120,6 +123,7 @@ const units = [
   },
   {
     city: "Brasília | DF",
+    slug: "brasilia",
     name: "Clínica Principia Brasília",
     address: [
       "OHB Centro Médico",
@@ -138,6 +142,7 @@ const units = [
   },
   {
     city: "Salvador | BA",
+    slug: "salvador",
     name: "Clínica Principia Salvador",
     address: [
       "Centro Médico Bela Vista",
@@ -159,7 +164,7 @@ const faqs = [
   {
     question: "O que a Clínica Principia trata?",
     answer:
-      "A Clínica Principia atende pessoas com dor, alterações de movimento, queixas de coluna, articulações, lesões traumáticas ou esportivas, alterações metabólicas e demandas de saúde da mulher.",
+      "A Clínica Principia trata dor, alterações de movimento, queixas de coluna, articulações, lesões traumáticas ou esportivas, alterações metabólicas e demandas de saúde da mulher com atendimento médico integrado.",
   },
   {
     question: "Quais especialidades estão disponíveis?",
@@ -175,6 +180,16 @@ const faqs = [
     question: "Como agendar uma consulta?",
     answer:
       "O agendamento é feito pelo WhatsApp. Informe sua queixa, cidade de atendimento e melhor horário para que a equipe direcione você para a unidade e especialidade adequadas.",
+  },
+  {
+    question: "A Clínica Principia atende dor na coluna em São Paulo?",
+    answer:
+      "Sim. A Clínica Principia atende dor na coluna em São Paulo nas unidades Butantã e Itaim Bibi, com avaliação integrada em ortopedia, neurocirurgia, medicina da dor e áreas relacionadas.",
+  },
+  {
+    question: "Há atendimento da Clínica Principia em Brasília e Salvador?",
+    answer:
+      "Sim. A Clínica Principia possui unidade em Brasília/DF, na Asa Sul, e unidade em Salvador/BA, no Shopping Bela Vista.",
   },
 ];
 
@@ -223,13 +238,15 @@ const structuredData = {
     },
     ...units.map((unit) => ({
       "@type": "MedicalClinic",
-      "@id": `${siteUrl}#${unit.city.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-")}`,
+      "@id": localBusinessId(unit.slug),
       name: unit.name,
-      url: siteUrl,
+      url: `${siteUrl}unidades/${unit.slug}`,
       image: `${siteUrl}bg-hero.png`,
       telephone: `+55 ${unit.phones[0]}`,
+      priceRange: "$$",
       parentOrganization: { "@id": `${siteUrl}#organization` },
       medicalSpecialty: specialties.map(({ title }) => title),
+      hasMap: getMapsLink(unit.mapQuery),
       address: {
         "@type": "PostalAddress",
         streetAddress: unit.streetAddress,
@@ -277,6 +294,12 @@ function App() {
     animatedItems.forEach((item) => observer.observe(item));
 
     return () => observer.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    if (window.location.pathname.startsWith("/unidades/")) {
+      document.getElementById("unidades")?.scrollIntoView({ block: "start" });
+    }
   }, []);
 
   return (
@@ -348,6 +371,10 @@ function App() {
           </div>
 
           <div className="about-copy">
+            <p>
+              A Clínica Principia é uma clínica médica integrada para dor, coluna, movimento,
+              metabolismo e saúde da mulher, com unidades em São Paulo, Brasília e Salvador.
+            </p>
             <p>
               A Clínica Principia nasceu para cuidar de pessoas com dores crônicas, lesões
               esportivas, limitações pós-cirúrgicas e condições que comprometem autonomia.
@@ -456,7 +483,7 @@ function App() {
         </div>
 
         <div className="units-grid">
-          {units.map(({ city, address, phones, mapQuery }, index) => (
+          {units.map(({ city, slug, name, address, phones, mapQuery }, index) => (
             <article
               className="unit-card"
               key={city}
@@ -478,7 +505,9 @@ function App() {
               </div>
 
               <div className="unit-info">
-                <h3>{city}</h3>
+                <h3>
+                  <a href={`/unidades/${slug}`}>{name}</a>
+                </h3>
                 <address>
                   {address.map((line) => (
                     <span key={line}>{line}</span>
@@ -494,6 +523,9 @@ function App() {
                     {phones[1]}
                   </a>
                 </div>
+                <p className="unit-local-proof">
+                  Atendimento local para dor, coluna, movimento e especialidades integradas em {city}.
+                </p>
               </div>
             </article>
           ))}

@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://clinicaprincipia.com.br/sitemap.xml
+Host: clinicaprincipia.com.br

@@ -13,6 +13,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="theme-color" content="#08284b" />
     <meta name="author" content="Clínica Principia" />
     <meta
       name="description"
@@ -41,10 +43,78 @@
     />
     <meta name="twitter:image" content="https://clinicaprincipia.com.br/bg-hero.png" />
     <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Resumo para ferramentas de IA" />
     <title>Clínica Principia | Dor, Coluna, Ortopedia e Medicina Integrada</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MedicalOrganization",
+        "@id": "https://clinicaprincipia.com.br/#organization",
+        "name": "Clínica Principia",
+        "url": "https://clinicaprincipia.com.br/",
+        "logo": "https://clinicaprincipia.com.br/logo.png",
+        "image": "https://clinicaprincipia.com.br/bg-hero.png",
+        "telephone": "+55 11 2305-9638",
+        "medicalSpecialty": [
+          "Neurocirurgia",
+          "Endocrinologia",
+          "Ortopedia",
+          "Reumatologia",
+          "Traumatologia",
+          "Medicina da Dor",
+          "Ginecologia"
+        ],
+        "areaServed": ["São Paulo", "Brasília", "Salvador"],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+55 11 97961-0690",
+          "contactType": "Agendamento",
+          "availableLanguage": "pt-BR"
+        }
+      }
+    </script>
+    <style>
+      .static-seo-content {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 32px 20px;
+        font-family: Arial, sans-serif;
+        line-height: 1.55;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <main class="static-seo-content">
+        <h1>Clínica Principia: cuidado médico integrado para dor, coluna e movimento</h1>
+        <p>
+          A Clínica Principia atende pacientes com dor, queixas de coluna, limitações de movimento,
+          alterações metabólicas e saúde da mulher em São Paulo, Brasília e Salvador.
+        </p>
+        <section aria-label="Especialidades">
+          <h2>Especialidades médicas</h2>
+          <p>
+            Neurocirurgia, endocrinologia, ortopedia, reumatologia, traumatologia, medicina da dor e
+            ginecologia atuam de forma integrada para avaliação, diagnóstico e plano de cuidado.
+          </p>
+        </section>
+        <section aria-label="Unidades">
+          <h2>Unidades da Clínica Principia</h2>
+          <p>Butantã: Rua Alvarenga, 220, São Paulo/SP. Telefone: 11 2305-9638.</p>
+          <p>Itaim Bibi: Rua Joaquim Floriano, 533, sala 1313, São Paulo/SP. Telefone: 11 3079-6701.</p>
+          <p>Brasília: SHLS Quadra 716, Conjunto L, Bloco B, Sala 616, Asa Sul, Brasília/DF.</p>
+          <p>Salvador: Shopping Bela Vista, Rua Alameda Euvaldo Luz, 92, Piso L2, Salvador/BA.</p>
+        </section>
+        <section aria-label="Perguntas frequentes">
+          <h2>Como agendar consulta?</h2>
+          <p>
+            O agendamento é feito pelo WhatsApp 11 97961-0690. Informe sua queixa, cidade de
+            atendimento e melhor horário para direcionamento à unidade e especialidade adequadas.
+          </p>
+        </section>
+      </main>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
