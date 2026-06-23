@@ -21,7 +21,7 @@ import "./styles.css";
 
 const whatsappNumber = "5511979610690";
 const whatsappUrl = `https://wa.me/${whatsappNumber}`;
-const siteUrl = "https://clinicaprincipia.com.br/";
+const siteUrl = "https://principiamedicina.com.br/";
 const localBusinessId = (slug) => `${siteUrl}unidades/${slug}#clinic`;
 
 const navLinks = [
@@ -268,6 +268,18 @@ const structuredData = {
         },
       })),
     },
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}#webpage`,
+      url: siteUrl,
+      name: "Clínica Principia | Dor, Coluna, Ortopedia e Medicina Integrada",
+      isPartOf: { "@id": `${siteUrl}#website` },
+      about: { "@id": `${siteUrl}#organization` },
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: ["#about-title", "#faq-title", "#contato"],
+      },
+    },
   ],
 };
 
@@ -505,22 +517,34 @@ function App() {
               </div>
 
               <div className="unit-info">
+                <span className="unit-city">
+                  <MapPin size={14} strokeWidth={2.7} aria-hidden="true" />
+                  {city}
+                </span>
                 <h3>
                   <a href={`/unidades/${slug}`}>{name}</a>
                 </h3>
                 <address>
-                  {address.map((line) => (
-                    <span key={line}>{line}</span>
-                  ))}
+                  <MapPin size={18} strokeWidth={2.4} aria-hidden="true" />
+                  <span>
+                    {address.map((line) => (
+                      <span key={line}>{line}</span>
+                    ))}
+                  </span>
                 </address>
                 <div className="unit-contacts">
-                  <a href={`tel:+55${phones[0].replace(/\D/g, "")}`}>
+                  <a className="unit-phone" href={`tel:+55${phones[0].replace(/\D/g, "")}`}>
                     <Phone size={15} strokeWidth={2.7} aria-hidden="true" />
-                    {phones[0]}
+                    Ligar: {phones[0]}
                   </a>
-                  <a href={`https://wa.me/55${phones[1].replace(/\D/g, "")}`} target="_blank" rel="noreferrer">
+                  <a
+                    className="unit-whatsapp"
+                    href={`https://wa.me/55${phones[1].replace(/\D/g, "")}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <MessageCircle size={15} strokeWidth={2.7} aria-hidden="true" />
-                    {phones[1]}
+                    WhatsApp
                   </a>
                 </div>
                 <p className="unit-local-proof">

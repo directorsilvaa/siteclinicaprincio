@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://clinicaprincipia.com.br/sitemap.xml
-Host: clinicaprincipia.com.br
+Sitemap: https://principiamedicina.com.br/sitemap.xml
+Host: principiamedicina.com.br

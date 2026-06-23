@@ -5,7 +5,7 @@ const { existsSync, statSync, createReadStream, readFileSync } = require("node:f
 const port = process.env.PORT || 3000;
 const distDir = resolve("dist");
 const indexFile = join(distDir, "index.html");
-const siteUrl = (process.env.SITE_URL || "https://clinicaprincipia.com.br").replace(/\/$/, "");
+const siteUrl = (process.env.SITE_URL || "https://principiamedicina.com.br").replace(/\/$/, "");
 
 const localPages = [
   {
